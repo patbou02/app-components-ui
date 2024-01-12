@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
 
 function Accordion({ items }) {
   console.log(items);
@@ -11,17 +12,24 @@ function Accordion({ items }) {
 
     const isExpanded = (i === expandedIndex);
 
+    const icon = <span className="text-2xl">{isExpanded ? <GoChevronDown /> : <GoChevronLeft />}</span>;
+
     return (
       <div key={item.id}>
-        <div onClick={() => handleClick(i)}>{item.label}</div>
-        {isExpanded && <div>{item.content}</div>}
+        <div
+          className="flex p-3 bg-gray-50 border-b items-center justify-between cursor-pointer"
+          onClick={() => handleClick(i)}
+        >
+          {item.label}
+          {icon}
+        </div>
+        {isExpanded && <div className="border-b p-5">{item.content}</div>}
       </div>
     );
   });
 
   return (
-    <div>
-      <div>Accordion</div>
+    <div className="border-x border-t rounded">
       {renderedItems}
     </div>
   );
