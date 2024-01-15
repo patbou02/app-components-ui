@@ -1,10 +1,10 @@
-function Table({ data, config }) {
+function Table({ data, config, keyFn }) {
 
-  const renderedRows = data.map(fruit => {
-    const renderedCells = config.map(cell => <td className="p-3" key={cell.label}>{cell.render(fruit)}</td>);
+  const renderedRows = data.map(rowData => {
+    const renderedCells = config.map(cell => <td className="p-3" key={cell.label}>{cell.render(rowData)}</td>);
 
     return (
-      <tr className="border-b" key={fruit.name}>
+      <tr className="border-b" key={keyFn(rowData)}>
         {renderedCells}
       </tr>
     );
