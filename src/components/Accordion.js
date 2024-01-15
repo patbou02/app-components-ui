@@ -6,9 +6,7 @@ function Accordion({ items }) {
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const handleClick = nextIndex => {
-    console.log('STALE version of expandedIndex', expandedIndex);
     setExpandedIndex((currentExpandedIndex) => {
-      console.log('UP TO DATE version', currentExpandedIndex);
       return (currentExpandedIndex === nextIndex) ? -1 : nextIndex;
     });
   };
