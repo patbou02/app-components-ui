@@ -9,6 +9,12 @@ function SortableTable(props) {
   const { config, data } = props;
 
   const handleClick = label => {
+    if (sortBy && label !== sortBy) {
+      setSortOrder('asc');
+      setSortBy(label);
+      return;
+    }
+
     if (sortOrder === null) {
       setSortOrder('asc');
       setSortBy(label);
@@ -59,40 +65,46 @@ function SortableTable(props) {
     });
   }
 
-  return (
-    <Table {...props} data={sortedData} config={updatedConfig} />
-  );
+  return <Table {...props} data={sortedData} config={updatedConfig} />;
+}
+
+function icons(position) {
+  switch (position) {
+    case 'both':
+      return (
+        <div>
+          <GoTriangleUp />
+          <GoTriangleDown />
+        </div>
+      );
+    case 'up':
+      return (
+        <div>
+          <GoTriangleUp />
+        </div>
+      );
+    case 'down':
+      return (
+        <div>
+          <GoTriangleDown />
+        </div>
+      );
+    default:
+      return (<div></div>);
+  }
 }
 
 function getIcons(label, sortBy, sortOrder) {
   if (label !== sortBy) {
-    return (
-      <div>
-        <GoTriangleUp />
-        <GoTriangleDown />
-      </div>
-    );
+    return icons('both');
   }
 
   if (sortOrder === null) {
-    return (
-      <div>
-        <GoTriangleUp />
-        <GoTriangleDown />
-      </div>
-    );
+    return icons('both');
   } else if (sortOrder === 'asc') {
-    return (
-      <div>
-        <GoTriangleUp />
-      </div>
-    );
+    return icons('up');
   } else if (sortOrder === 'desc') {
-    return (
-      <div>
-        <GoTriangleDown />
-      </div>
-    );
+    return icons('down');
   }
 }
 
