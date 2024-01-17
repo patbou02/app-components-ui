@@ -5,6 +5,7 @@ import DropdownPage from './pages/DropdownPage';
 import ModalPage from './pages/ModalPage';
 import Sidebar from './components/Sidebar';
 import TablePage from './pages/TablePage';
+import CounterPage from './pages/CounterPage';
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/table">
           <TablePage />
+        </Route>
+        <Route path="/counter">
+          <CounterPage initialCount={10} />
         </Route>
       </div>
     </div>
